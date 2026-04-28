@@ -1,22 +1,23 @@
 #include "HelloGL.h"
-//#include "Cube
+#include "Cube.h"
 #include "Structures.h"
 #include <string>
-
+#include "MeshLoader.h"
 #include <iostream> 
 
 //Testing to see if works with Teapot:
 #include <fstream>  
 #include <sstream> 
 #include <vector>   
-void InitObjects()
+void HelloGL::InitObjects()
 {
     camera = new Camera();
-    Cube::Load((char*)"cube.txt");
+    Mesh* cubeMesh = MeshLoader::Load((char*)"cube.txt");
     //cube = new Cube();
     for (int i = 0; i < 200; i++)
     {
-        cube[i] = new Cube(((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
+        //cube[i] = new Cube(((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
+        new Cube(cubeMesh, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
     }
 
     camera->eye.x = 0.0f; camera->eye.y = 10.0f; camera->eye.z = 30.0f;
@@ -26,7 +27,8 @@ void InitObjects()
 
     rotation = 0.0f;
 }
-void InitGL(int argc, char* argv[])
+
+void HelloGL::InitGL(int argc, char* argv[])
 {
     std::string windowName = "OpenGL Project for Graphics Programming"; 
 
@@ -59,8 +61,9 @@ void InitGL(int argc, char* argv[])
 HelloGL::HelloGL(int argc, char* argv[]) // constructor - double check in tutorial 2
 {
     glutMainLoop();
-    _mesh = mesh;
 }
+
+
 
 void HelloGL::Display()
 {

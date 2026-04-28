@@ -18,8 +18,8 @@ private:
 public:
     // Constructor definition
     HelloGL(int argc, char* argv[]);
-    void InitObjects();
     void InitGL(int argc, char* argv[]);
+    void InitObjects();
 
     // Destructor
     ~HelloGL(void);
