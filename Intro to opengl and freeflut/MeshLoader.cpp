@@ -2,94 +2,64 @@
 
 #include <iostream>
 #include <fstream>
+#include "Structures.h"
 
 using namespace std;
 
 namespace MeshLoader
 {
-	void LoadVertices(ifstream& inFile, Mesh& mesh);
-	void LoadColours(ifstream& inFile, Mesh& mesh);
-	void LoadIndices(ifstream& inFile, Mesh& mesh);
-
-	void LoadVertices(ifstream& inFile, Mesh& mesh)
-	{
-		inFile >> mesh.VertexCount;
-
-		if (mesh.VertexCount > 0)
-		{
-			mesh.Vertices = new Vertex[mesh.VertexCount];
-
-			for (int i = 0; i < mesh.VertexCount; i++)
-			{
-				inFile >> mesh.Vertices[i].x;
-				inFile >> mesh.Vertices[i].y;
-				inFile >> mesh.Vertices[i].z;
-			}
-		}
-	}
-
-	void LoadColours(ifstream& inFile, Mesh& mesh)
-	{
-		//TODO: LOAD COLOURS
-	}
-
-	void LoadIndices(ifstream& inFile, Mesh& mesh)
-	{
-		//TODO: Load Indices
-	}
-
-	Mesh* MeshLoader::Load(char* path)
+	Mesh* Load(char* path)
 	{
 		Mesh* mesh = new Mesh();
 
 		ifstream inFile;
-
 		inFile.open(path);
 
 		if (!inFile.good())  
 		{
-			cerr  << "Can't open texture file " << path << endl;
+			cerr << "Can't open texture file " << path << endl;
+			delete mesh;
 			return nullptr;
 		}
-		
-		inFile >> numVertices;
-		indexedVertices = new Vertex[numVertices];
-		for (int i = 0; i < numVertices; i++)
+
+		// Load Vertices
+		inFile >> mesh->VertexCount;
+		if (mesh->VertexCount > 0)
 		{
-		    inFile >> indexedVertices[i].x
-		           >> indexedVertices[i].y
-		           >> indexedVertices[i].z;
+			mesh->Vertices = new Vertex[mesh->VertexCount];
+			for (int i = 0; i < mesh->VertexCount; i++)
+			{
+				inFile >> mesh->Vertices[i].x
+					   >> mesh->Vertices[i].y
+					   >> mesh->Vertices[i].z;
+			}
 		}
-		
-	    inFile >> numColors;
-	    indexedColors = new Color[numColors];
-	    for (int i = 0; i < numColors; i++)
-	    {
-	        inFile >> indexedColors[i].r
-	               >> indexedColors[i].g
-	               >> indexedColors[i].b;
-	    }
-			
-		
-			    inFile >> numIndices;
-			    indices = new GLushort[numIndices];
-			    for (int i = 0; i < numIndices; i++)
-			    {
-			        inFile >> indices[i];
-			    }
-			
-			    inFile.close();
-			    return true;
-			 
-		//LOAD DATA USING METHODS ABOVE
 
+		// Load Colors
+		inFile >> mesh->ColorCount;
+		if (mesh->ColorCount > 0)
+		{
+			mesh->Colors = new Color[mesh->ColorCount];
+			for (int i = 0; i < mesh->ColorCount; i++)
+			{
+				inFile >> mesh->Colors[i].r
+					   >> mesh->Colors[i].g
+					   >> mesh->Colors[i].b;
+			}
+		}
+
+		// Load Indices
+		inFile >> mesh->IndexCount;
+		if (mesh->IndexCount > 0)
+		{
+			mesh->Indices = new GLushort[mesh->IndexCount];
+			for (int i = 0; i < mesh->IndexCount; i++)
+			{
+				inFile >> mesh->Indices[i];
+			}
+		}
+
+		inFile.close();
 		return mesh;
-
-		//s[;oitttt
-				//    }
-		//
-		//    
-		//
-		//    /
 	}
 }

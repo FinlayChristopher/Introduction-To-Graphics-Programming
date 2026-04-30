@@ -23,6 +23,11 @@ namespace GLUTCallbacks
 
     void Timer(int preferredRefresh)
     {
+        if (helloGL == nullptr)
+        {
+            return;
+        }
+        
         int updateTime = glutGet(GLUT_ELAPSED_TIME);
         helloGL->Update();
         updateTime = glutGet(GLUT_ELAPSED_TIME) - updateTime;
