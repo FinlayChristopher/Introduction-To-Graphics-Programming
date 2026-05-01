@@ -16,6 +16,7 @@
     <ClCompile Include="MeshLoader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="SceneObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h">
@@ -33,6 +34,7 @@
     <ClInclude Include="MeshLoader.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="SceneObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

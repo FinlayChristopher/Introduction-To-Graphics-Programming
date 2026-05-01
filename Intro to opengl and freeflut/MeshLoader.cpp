@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include "Structures.h"
 
 using namespace std;
 

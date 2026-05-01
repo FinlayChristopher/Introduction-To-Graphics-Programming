@@ -1,7 +1,6 @@
 #pragma once
-#include "Structures.h"
-#include "GLUTCallbacks.h"
 #include "Cube.h"
+
 #define REFRESHRATE 16
 
 class HelloGL

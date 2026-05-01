@@ -5,7 +5,6 @@
 #include "GL/freeglut.h"
 #include "GLUTCallbacks.h"
 
-
 struct Vector3
 
 {
