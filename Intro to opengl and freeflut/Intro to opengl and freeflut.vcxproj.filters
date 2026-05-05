@@ -16,7 +16,12 @@
     <ClCompile Include="MeshLoader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObject.cpp" />
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h">
@@ -34,7 +39,10 @@
     <ClInclude Include="MeshLoader.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="SceneObject.h" />
+    <ClInclude Include="SceneObject.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

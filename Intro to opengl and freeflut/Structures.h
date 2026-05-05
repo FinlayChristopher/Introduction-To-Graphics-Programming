@@ -5,6 +5,12 @@
 #include "GL/freeglut.h"
 #include "GLUTCallbacks.h"
 
+struct TexCoord 
+{
+    GLfloat u;
+    GLfloat v;
+};
+
 struct Vector3
 
 {
@@ -34,4 +40,6 @@ struct Mesh {
     Color* Colors;
     GLushort* Indices;
     GLfloat VertexCount, ColorCount, IndexCount;
+    TexCoord* TexCoords;      // ADD THIS
+    int TexCoordCount;  // ADD THIS
 };
