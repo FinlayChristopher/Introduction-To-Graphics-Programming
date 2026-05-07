@@ -42,7 +42,9 @@
     <ClInclude Include="SceneObject.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="Texture2D.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

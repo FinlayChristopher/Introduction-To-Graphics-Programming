@@ -8,22 +8,12 @@
 void HelloGL::InitObjects()
 {
     camera = new Camera();
-    Texture2D* texture = new Texture2D();
-    texture->Load((char*)"penguins.raw", 512, 512);
-
-    /*Mesh* cubeMesh = MeshLoader::Load((char*)"pyramid.txt");
-    for (int i = 0; i < 200; i++)
-    {
-        cube[i] = new Cube(cubeMesh, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
-    }*/
-
+    
     Mesh* cubeMesh = MeshLoader::Load((char*)"pyramid.txt");
     for (int i = 0; i < 200; i++)
     {
-        _objects.push_back(new Cube(cubeMesh, texture, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f));
+        cube[i] = new Cube(cubeMesh, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
     }
-
-
 
     camera->eye.x = 0.0f; camera->eye.y = 10.0f; camera->eye.z = 30.0f;
     camera->centre.x = 0.0f; camera->centre.y = 0.0f; camera->centre.z = 0.0f;
