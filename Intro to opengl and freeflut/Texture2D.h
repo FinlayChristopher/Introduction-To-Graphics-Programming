@@ -1,17 +1,14 @@
-//#pragma once
-//
-//#pragma once
-//#include <Windows.h>
-//
-//
-//class Texture2D 
-//{
-//private:
-//    GLuint _ID;        // The OpenGL handle to the texture on the GPU
-//    int _width;
-//    int _height;
-//
-//public:
+#pragma once
+#include <Windows.h>
+#include <gl\glu.h> 
+
+class Texture2D 
+{
+private:
+    GLuint _ID;        // The OpenGL handle to the texture on the GPU
+    int _width;
+    int _height;
+public:
 //    Texture2D();
 //    ~Texture2D();
 //

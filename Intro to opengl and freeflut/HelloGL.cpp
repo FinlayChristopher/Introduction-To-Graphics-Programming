@@ -8,7 +8,10 @@
 void HelloGL::InitObjects()
 {
     camera = new Camera();
+<<<<<<< HEAD
     
+=======
+>>>>>>> parent of a870d16 (2)
     Mesh* cubeMesh = MeshLoader::Load((char*)"pyramid.txt");
     for (int i = 0; i < 200; i++)
     {
@@ -28,11 +31,6 @@ void HelloGL::InitGL(int argc, char* argv[])
 
     int windowPositionX = 0;
     int windowPositionY = 0;
-
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
 
     GLUTCallbacks::Init(this);
     glutInit(&argc, argv);
