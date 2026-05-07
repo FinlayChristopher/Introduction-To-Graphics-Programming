@@ -89,14 +89,14 @@
 //
 //    delete[] data;
 //    return true;
-//}//}
+//}
 =======
 #include "Texture2D.h"
 #include <fstream>
 using namespace std;
 
 Texture2D::Texture2D() {
-    // Nothing needed ï¿½ _ID will be set by Load()
+    // Nothing needed — _ID will be set by Load()
 }
 
 Texture2D::~Texture2D() {
@@ -110,7 +110,7 @@ bool Texture2D::Load(char* path, int width, int height) {
 
     // --- 1. Read the raw pixel data from disk ---
     ifstream inFile;
-    inFile.open(path, ios::binary); // binary mode ï¿½ no newline translation
+    inFile.open(path, ios::binary); // binary mode — no newline translation
     if (!inFile.good()) {
         return false; // File not found or unreadable
     }
@@ -141,7 +141,7 @@ bool Texture2D::Load(char* path, int width, int height) {
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    // --- 4. Free the CPU-side copy ï¿½ we no longer need it ---
+    // --- 4. Free the CPU-side copy — we no longer need it ---
     delete[] tempTextureData;
 
     return true;
