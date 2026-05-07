@@ -43,39 +43,18 @@ Cube::~Cube()
 }
 
 void Cube::Draw()
-{
-    if (_mesh != nullptr) {
-
+{   
+    if (_mesh->Vertices != nullptr && _mesh->Colors != nullptr && _mesh->Indices != nullptr)
+    {
         // 1. Bind texture FIRST — tells OpenGL which texture to use
         glBindTexture(GL_TEXTURE_2D, _texture->GetID());
 
         // 2. Tell OpenGL that tex coord data is coming
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glVertexPointer(3, GL_FLOAT, 0, _mesh->Vertices);
-
-        glEnableClientState(GL_COLOR_ARRAY);
-        glColorPointer(3, GL_FLOAT, 0, _mesh->Colors);
-
         // 3. Point OpenGL at your tex coord array (add AFTER ColorPointer)
         glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords);
 
-        glPushMatrix();
-        // transformations...
-        glDrawElements(GL_TRIANGLES, _mesh->IndexCount,
-            GL_UNSIGNED_SHORT, _mesh->Indices);
-        glPopMatrix();
-
-        glDisableClientState(GL_COLOR_ARRAY);
-        glDisableClientState(GL_VERTEX_ARRAY);
-
-        // 4. Disable tex coord state when done — good housekeeping
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    }
-    
-    if (_mesh->Vertices != nullptr && _mesh->Colors != nullptr && _mesh->Indices != nullptr)
-    {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_COLOR_ARRAY);
         glVertexPointer(3, GL_FLOAT, 0, _mesh->Vertices); 
@@ -88,6 +67,9 @@ void Cube::Draw()
 
         glDisableClientState(GL_COLOR_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
+
+        // 4. Disable tex coord state when done — good housekeeping
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     }
     
 }

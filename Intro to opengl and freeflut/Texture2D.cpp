@@ -53,3 +53,39 @@ bool Texture2D::Load(char* path, int width, int height) {
 
     return true;
 }
+
+bool Texture2D::LoadBMP(char* path) {
+    ifstream file(path, ios::binary);
+    if (!file.good()) return false;
+
+    // BMP header is 54 bytes
+    char header[54];
+    file.read(header, 54);
+
+    // Extract width and height from known byte offsets in the header
+    _width = *(int*)&header[18]; // bytes 18–21
+    _height = *(int*)&header[22]; // bytes 22–25
+
+    int dataSize = _width * _height * 3;
+    char* data = new char[dataSize];
+    file.read(data, dataSize);
+    file.close();
+
+    // BMP stores pixels as BGR, not RGB — swap if needed
+    for (int i = 0; i < dataSize; i += 3) {
+        char temp = data[i];
+        data[i] = data[i + 2]; // B -> R position
+        data[i + 2] = temp;        // R -> B position
+    }
+
+    glGenTextures(1, &_ID);
+    glBindTexture(GL_TEXTURE_2D, _ID);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, 3, _width, _height,
+        GL_RGB, GL_UNSIGNED_BYTE, data);
+
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    delete[] data;
+    return true;
+}
