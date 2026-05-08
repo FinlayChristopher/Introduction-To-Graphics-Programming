@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include "SceneObject.h"
-//#include <string>
 #include "Structures.h"
 
 //Vertex* Cube::indexedVertices = nullptr;
@@ -29,7 +28,7 @@ GLushort Cube::indices[] = { 0, 1, 2, 2, 3, 0, // front
 7, 4, 3, 3, 2, 7, // bottom
 4, 7, 6, 6, 5, 4 }; // back*/
 
-Cube::Cube(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObject(mesh, texture) 
+Cube::Cube(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObject(mesh, texture)
 {
     _rotation = 0.0f;
     _position.x = x;
@@ -38,6 +37,8 @@ Cube::Cube(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObj
     _mesh = mesh;
 }
 
+
+
 Cube::~Cube()
 {
 }
@@ -45,20 +46,18 @@ Cube::~Cube()
 void Cube::Draw()
 {   
     if (_mesh->Vertices != nullptr && _mesh->Colors != nullptr && _mesh->Indices != nullptr)
-    {
-        // 1. Bind texture FIRST — tells OpenGL which texture to use
+    {  
         glBindTexture(GL_TEXTURE_2D, _texture->GetID());
-
-        // 2. Tell OpenGL that tex coord data is coming
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        // 3. Point OpenGL at your tex coord array (add AFTER ColorPointer)
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glVertexPointer(3, GL_FLOAT, 0, _mesh->Vertices); 
+
+        glEnableClientState(GL_COLOR_ARRAY);
+        glColorPointer(3, GL_FLOAT, 0, _mesh->Colors); 
+
         glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords);
 
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableClientState(GL_COLOR_ARRAY);
-        glVertexPointer(3, GL_FLOAT, 0, _mesh->Vertices); 
-        glColorPointer(3, GL_FLOAT, 0, _mesh->Colors); //VertexCount, ColorCount
         glPushMatrix();
         glTranslatef(_position.x, _position.y, _position.z);
         glRotatef(_rotation, 1.0f, 0.0f, 0.0f); 
@@ -68,7 +67,6 @@ void Cube::Draw()
         glDisableClientState(GL_COLOR_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
 
-        // 4. Disable tex coord state when done — good housekeeping
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     }
     

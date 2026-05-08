@@ -10,20 +10,24 @@ void HelloGL::InitObjects()
     camera = new Camera();
     Texture2D* texture = new Texture2D();
     texture->Load((char*)"penguins.raw", 512, 512);
+    printf("Texture ID: %d\n", texture->GetID());
 
-    /*Mesh* cubeMesh = MeshLoader::Load((char*)"pyramid.txt");
+    Mesh* cubeMesh = MeshLoader::Load((char*)"cube.txt");
+    printf("Vertex count: %d\n", cubeMesh->VertexCount);
+    printf("TexCoord count: %d\n", cubeMesh->TexCoordCount);
+    printf("Index count: %d\n", cubeMesh->IndexCount);
+
     for (int i = 0; i < 200; i++)
+    {
+        cube[i] = new Cube(cubeMesh, texture, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
+    }
+    
+
+
+    /*for (int i = 0; i < 200; i++)
     {
         cube[i] = new Cube(cubeMesh, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
     }*/
-
-    Mesh* cubeMesh = MeshLoader::Load((char*)"pyramid.txt");
-    for (int i = 0; i < 200; i++)
-    {
-        _objects.push_back(new Cube(cubeMesh, texture, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f));
-    }
-
-
 
     camera->eye.x = 0.0f; camera->eye.y = 10.0f; camera->eye.z = 30.0f;
     camera->centre.x = 0.0f; camera->centre.y = 0.0f; camera->centre.z = 0.0f;
@@ -39,17 +43,17 @@ void HelloGL::InitGL(int argc, char* argv[])
     int windowPositionX = 0;
     int windowPositionY = 0;
 
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-
     GLUTCallbacks::Init(this);
     glutInit(&argc, argv);
 
     glutInitWindowSize(800, 800);
     glutInitWindowPosition(windowPositionX, windowPositionY);
     glutCreateWindow(windowName.c_str());
+
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

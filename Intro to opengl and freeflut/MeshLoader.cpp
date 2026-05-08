@@ -1,5 +1,4 @@
 #include "MeshLoader.h"
-
 #include <iostream>
 #include <fstream>
 
@@ -52,7 +51,8 @@ namespace MeshLoader
 
 		// Allocate and read each u,v pair
 		mesh->TexCoords = new TexCoord[mesh->TexCoordCount];
-		for (int i = 0; i < mesh->TexCoordCount; i++) {
+		for (int i = 0; i < mesh->TexCoordCount; i++) 
+		{
 			inFile >> mesh->TexCoords[i].u;
 			inFile >> mesh->TexCoords[i].v;
 		}
