@@ -1,7 +1,5 @@
 #pragma once
 #include "SceneObject.h"
-#include "Structures.h"
-#include "Texture2D.h"
 
 class Cube : public SceneObject
 {
@@ -18,5 +16,4 @@ public:
 	void Update();
 
 	//void SetRotation(float rotation);
-
 };

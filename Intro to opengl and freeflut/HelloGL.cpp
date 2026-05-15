@@ -1,8 +1,14 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include "HelloGL.h"
+
 #include "HelloGL.h"
 #include "Cube.h"
+#include "Pyramid.h"
 #include "Structures.h"
 #include "MeshLoader.h"
 #include <string>
+
+#include <Windows.h> 
 
 
 void HelloGL::InitObjects()
@@ -13,15 +19,18 @@ void HelloGL::InitObjects()
     printf("Texture ID: %d\n", texture->GetID());
 
     Mesh* cubeMesh = MeshLoader::Load((char*)"cube.txt");
+    Mesh* pyramidMesh = MeshLoader::Load((char*)"pyramid.txt");
+
+    /*printf("Pyramid vertex count: %d\n", pyramidMesh->VertexCount);
     printf("Vertex count: %d\n", cubeMesh->VertexCount);
     printf("TexCoord count: %d\n", cubeMesh->TexCoordCount);
-    printf("Index count: %d\n", cubeMesh->IndexCount);
+    printf("Index count: %d\n", cubeMesh->IndexCount);*/
 
     for (int i = 0; i < 200; i++)
     {
         cube[i] = new Cube(cubeMesh, texture, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
+        pyramid[i] = new Pyramid(pyramidMesh, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
     }
-    
 
 
     /*for (int i = 0; i < 200; i++)
@@ -38,6 +47,16 @@ void HelloGL::InitObjects()
 
 void HelloGL::InitGL(int argc, char* argv[])
 {
+    FILE* f = fopen("cube.txt", "r");
+    printf("File found: %s\n", f ? "YES" : "NO");
+    if (f) fclose(f);
+
+    char buffer[256];
+    GetCurrentDirectoryA(256, buffer);
+    printf("Working directory: %s\n", buffer);
+
+    //delete above
+
     std::string windowName = "OpenGL Project for Graphics Programming"; 
 
     int windowPositionX = 0;
@@ -82,6 +101,7 @@ void HelloGL::Display()
     for (int i = 0; i < 200; i++)
     {
         cube[i]->Draw();
+        pyramid[i]->Draw();
     }
     glFlush();
     glutSwapBuffers();
@@ -96,6 +116,7 @@ void HelloGL::Update()
     for (int i = 0; i < 200; i++)
     {
         cube[i]->Update();
+        pyramid[i]->Update();
     }
     
     glLoadIdentity();

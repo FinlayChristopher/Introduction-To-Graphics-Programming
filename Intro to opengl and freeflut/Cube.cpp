@@ -1,8 +1,6 @@
 #include "Cube.h"
 #include <iostream>
 #include <fstream>
-#include "SceneObject.h"
-#include "Structures.h"
 
 //Vertex* Cube::indexedVertices = nullptr;
 //Color* Cube::indexedColors = nullptr;
@@ -34,7 +32,6 @@ Cube::Cube(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObj
     _position.x = x;
     _position.y = y;
     _position.z = z;
-    _mesh = mesh;
 }
 
 

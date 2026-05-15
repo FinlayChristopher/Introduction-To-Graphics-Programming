@@ -1,5 +1,6 @@
 #pragma once
 #include "Cube.h"
+#include "Pyramid.h"
 
 #define REFRESHRATE 16
 
@@ -10,6 +11,8 @@ private:
     Camera* camera;
     
     Cube* cube[200];
+    Pyramid* pyramid[200];
+
     static Vertex indexedVertices[];
     static Color indexedColors[];
 	static GLushort indices[];
