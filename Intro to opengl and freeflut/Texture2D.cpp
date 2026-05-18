@@ -4,7 +4,9 @@ using namespace std;
 
 Texture2D::Texture2D() 
 {
-    // Nothing needed — _ID will be set by Load()
+    _ID = 0;
+    _width = 0;
+    _height = 0;
 }
 
 Texture2D::~Texture2D() 

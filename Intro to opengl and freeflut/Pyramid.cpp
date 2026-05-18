@@ -3,7 +3,7 @@
 #include <fstream>
 
 
-Pyramid::Pyramid(Mesh* mesh, float x, float y, float z) : SceneObject(mesh, nullptr)
+Pyramid::Pyramid(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObject(mesh, texture)
 {
     _rotation = 0.0f;
     _position.x = x;
@@ -19,16 +19,18 @@ void Pyramid::Draw()
 {
     if (_mesh->Vertices != nullptr && _mesh->Colors != nullptr && _mesh->Indices != nullptr)
     {
-        glBindTexture(GL_TEXTURE_2D, _texture->GetID());
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        if (_texture != nullptr)
+        {
+            glBindTexture(GL_TEXTURE_2D, _texture->GetID());
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords); // move it in here
+        }
 
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(3, GL_FLOAT, 0, _mesh->Vertices);
 
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, _mesh->Colors);
-
-        glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords);
 
         glPushMatrix();
         glTranslatef(_position.x, _position.y, _position.z);

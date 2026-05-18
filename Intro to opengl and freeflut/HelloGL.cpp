@@ -14,22 +14,20 @@
 void HelloGL::InitObjects()
 {
     camera = new Camera();
-    Texture2D* texture = new Texture2D();
-    texture->Load((char*)"penguins.raw", 512, 512);
-    printf("Texture ID: %d\n", texture->GetID());
+
+    Texture2D* cubeTexture = new Texture2D();
+    cubeTexture->Load((char*)"penguins.raw", 512, 512);
+
+    Texture2D* pyramidTexture = new Texture2D();
+    pyramidTexture->Load((char*)"stars.raw", 512, 512);
 
     Mesh* cubeMesh = MeshLoader::Load((char*)"cube.txt");
     Mesh* pyramidMesh = MeshLoader::Load((char*)"pyramid.txt");
 
-    /*printf("Pyramid vertex count: %d\n", pyramidMesh->VertexCount);
-    printf("Vertex count: %d\n", cubeMesh->VertexCount);
-    printf("TexCoord count: %d\n", cubeMesh->TexCoordCount);
-    printf("Index count: %d\n", cubeMesh->IndexCount);*/
-
     for (int i = 0; i < 200; i++)
     {
-        cube[i] = new Cube(cubeMesh, texture, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
-        pyramid[i] = new Pyramid(pyramidMesh, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
+        cube[i] = new Cube(cubeMesh, cubeTexture, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
+        pyramid[i] = new Pyramid(pyramidMesh, pyramidTexture, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 10.0f);
     }
 
 
@@ -47,16 +45,6 @@ void HelloGL::InitObjects()
 
 void HelloGL::InitGL(int argc, char* argv[])
 {
-    FILE* f = fopen("cube.txt", "r");
-    printf("File found: %s\n", f ? "YES" : "NO");
-    if (f) fclose(f);
-
-    char buffer[256];
-    GetCurrentDirectoryA(256, buffer);
-    printf("Working directory: %s\n", buffer);
-
-    //delete above
-
     std::string windowName = "OpenGL Project for Graphics Programming"; 
 
     int windowPositionX = 0;
